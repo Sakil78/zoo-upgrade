@@ -146,6 +146,7 @@ public class Main {
                  * object state of the animal into the file
                  */
                 case 4:
+                    // Save all animals to their files
                     writeObjectsToFile(tigerObject, penguinObject, dolphinObject);
                     break;
                     /**
@@ -153,6 +154,7 @@ public class Main {
                      * fetch the object state of the animal from the file to display on screen
                      */
                 case 5:
+                    // Read and display saved animal data
                     readObjectsFromFile();
                     break;
 
