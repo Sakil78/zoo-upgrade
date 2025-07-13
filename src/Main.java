@@ -3,6 +3,10 @@ import java.io.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileNotFoundException;
+import java.io.ClassNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
@@ -149,6 +153,8 @@ public class Main {
                      * fetch the object state of the animal from the file to display on screen
                      */
                 case 5:
+                    readObjectsFromFile();
+                    break;
 
                 default:
                     System.out.println("Sorry no such animal available.");
@@ -221,11 +227,29 @@ public class Main {
      * TODO 4.b: Print the save state of Penguin from the file penguin.txt
      * TODO 4.c: Print the save state of Dolphin from the file dolphin.txt
      */
+    public static void readObjectsFromFile() {
+        try (
+                ObjectInputStream oisTiger   = new ObjectInputStream(new FileInputStream("tiger.txt"));
+                ObjectInputStream oisPenguin = new ObjectInputStream(new FileInputStream("penguin.txt"));
+                ObjectInputStream oisDolphin = new ObjectInputStream(new FileInputStream("dolphin.txt"));
+        ) {
+            Tiger   tiger   = (Tiger) oisTiger.readObject();
+            Penguin penguin = (Penguin) oisPenguin.readObject();
+            Dolphin dolphin = (Dolphin) oisDolphin.readObject();
+
+            System.out.println("---- Loaded Tiger ----");
+            System.out.println(tiger);
+            System.out.println("---- Loaded Penguin ----");
+            System.out.println(penguin);
+            System.out.println("---- Loaded Dolphin ----");
+            System.out.println(dolphin);
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error reading animals from file:");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * TODO 4: End
      */
 }
-
-
-
