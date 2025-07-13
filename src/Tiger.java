@@ -54,4 +54,16 @@ public class Tiger extends Animal implements Walk, Serializable {
         System.out.println("Tiger: I am moving at the speed " + speed);
     }
 
+    @Override
+    public String toString() {
+        return "Tiger{" +
+                "name='" + getNameOfAnimal() + '\'' +
+                ", age=" + getAge() +
+                ", height=" + getHeight() +
+                ", weight=" + getWeight() +
+                ", numberOfStripes=" + numberOfStripes +
+                ", speed=" + speed +
+                ", soundLevel=" + soundLevel +
+                '}';
+    }
 }

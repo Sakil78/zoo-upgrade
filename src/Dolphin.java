@@ -47,4 +47,15 @@ public class Dolphin extends Animal implements Swim, Serializable {
         System.out.println("Dolphin: I am swimming at the speed " + swimmingSpeed);
     }
 
+    @Override
+    public String toString() {
+        return "Dolphin{" +
+                "name='" + getNameOfAnimal() + '\'' +
+                ", age=" + getAge() +
+                ", height=" + getHeight() +
+                ", weight=" + getWeight() +
+                ", color='" + color + '\'' +
+                ", swimmingSpeed=" + swimmingSpeed +
+                '}';
+    }
 }

@@ -58,4 +58,16 @@ public class Penguin extends Animal implements Walk, Swim, Serializable {
         System.out.println("Penguin: I am walking at the speed " + walkSpeed + " mph");
     }
 
+    @Override
+    public String toString() {
+        return "Penguin{" +
+                "name='" + getNameOfAnimal() + '\'' +
+                ", age=" + getAge() +
+                ", height=" + getHeight() +
+                ", weight=" + getWeight() +
+                ", walkSpeed=" + getWalkSpeed() +
+                ", swimSpeed=" + getSwimSpeed() +
+                ", isSwimming=" + isSwimming() +
+                '}';
+    }
 }
