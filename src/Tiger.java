@@ -4,7 +4,6 @@ import java.io.Serializable;
  * TODO 1.a: Implement serializable interface for class Tiger
  */
 public class Tiger extends Animal implements Walk, Serializable {
-    private static final long serialVersionUID = 1L;
 
     // property for stripes on tiger
     int numberOfStripes;
@@ -54,14 +53,14 @@ public class Tiger extends Animal implements Walk, Serializable {
         System.out.println("Tiger: I am moving at the speed " + speed);
     }
 
+    /**
+     * TODO 2.a: Override the toString method display the deserialized content after reading the file
+     */
+
     @Override
     public String toString() {
         return "Tiger{" +
-                "name='" + getNameOfAnimal() + '\'' +
-                ", age=" + getAge() +
-                ", height=" + getHeight() +
-                ", weight=" + getWeight() +
-                ", numberOfStripes=" + numberOfStripes +
+                "numberOfStripes=" + numberOfStripes +
                 ", speed=" + speed +
                 ", soundLevel=" + soundLevel +
                 '}';

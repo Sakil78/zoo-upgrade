@@ -1,12 +1,9 @@
 import java.util.Scanner;
-import java.io.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.io.FileNotFoundException;
-import java.io.ClassNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
@@ -146,14 +143,18 @@ public class Main {
                  * object state of the animal into the file
                  */
                 case 4:
+                    System.out.println("Write the objects to file");
+
                     // Save all animals to their files
                     writeObjectsToFile(tigerObject, penguinObject, dolphinObject);
                     break;
-                    /**
-                     * TODO 6: Introduce case 5 to call the readObjectsFromFile method to
-                     * fetch the object state of the animal from the file to display on screen
-                     */
+                /**
+                 * TODO 6: Introduce case 5 to call the readObjectsFromFile method to
+                 * fetch the object state of the animal from the file to display on screen
+                 */
                 case 5:
+                    System.out.println("File read successfully");
+
                     // Read and display saved animal data
                     readObjectsFromFile();
                     break;
@@ -168,7 +169,7 @@ public class Main {
         } while (continueOuterLoop == 1);
     }
 
-    static int animalChoiceMenu(Scanner keyboard) {
+    private static int animalChoiceMenu(Scanner keyboard) {
         int choiceGivenByUser;
 
         System.out.println("******* ZOO ANIMAL choice menu ******");
@@ -204,11 +205,11 @@ public class Main {
      */
     public static void writeObjectsToFile(Tiger tiger, Penguin penguin, Dolphin dolphin) {
         // Serialize each animal into its own file
-        try (
+        try {
                 ObjectOutputStream oosTiger   = new ObjectOutputStream(new FileOutputStream("tiger.txt"));
                 ObjectOutputStream oosPenguin = new ObjectOutputStream(new FileOutputStream("penguin.txt"));
                 ObjectOutputStream oosDolphin = new ObjectOutputStream(new FileOutputStream("dolphin.txt"));
-        ) {
+
             oosTiger.writeObject(tiger);
             oosPenguin.writeObject(penguin);
             oosDolphin.writeObject(dolphin);
@@ -230,27 +231,23 @@ public class Main {
      * TODO 4.c: Print the save state of Dolphin from the file dolphin.txt
      */
     public static void readObjectsFromFile() {
-        try (
-                ObjectInputStream oisTiger   = new ObjectInputStream(new FileInputStream("tiger.txt"));
-                ObjectInputStream oisPenguin = new ObjectInputStream(new FileInputStream("penguin.txt"));
-                ObjectInputStream oisDolphin = new ObjectInputStream(new FileInputStream("dolphin.txt"));
-        ) {
-            Tiger   tiger   = (Tiger) oisTiger.readObject();
-            Penguin penguin = (Penguin) oisPenguin.readObject();
-            Dolphin dolphin = (Dolphin) oisDolphin.readObject();
+        try {
+            ObjectInputStream oosTiger = new ObjectInputStream(new FileInputStream("tiger.txt"));
+            ObjectInputStream oosPenguin = new ObjectInputStream(new FileInputStream("penguin.txt"));
+            ObjectInputStream oosDolphin = new ObjectInputStream(new FileInputStream("dolphin.txt"));
+            Tiger tiger = (Tiger) oosTiger.readObject();
+            Penguin penguin = (Penguin) oosPenguin.readObject();
+            Dolphin dolphin = (Dolphin) oosDolphin.readObject();
 
-            System.out.println("---- Loaded Tiger ----");
-            System.out.println(tiger);
-            System.out.println("---- Loaded Penguin ----");
-            System.out.println(penguin);
-            System.out.println("---- Loaded Dolphin ----");
-            System.out.println(dolphin);
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Error reading animals from file:");
+            System.out.println("Tiger data retrieved from file: " + tiger.toString());
+            System.out.println("Penguin data retrieved from file: " + penguin.toString());
+            System.out.println("Dolphin data retrieved from file:  " + dolphin.toString());
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
-
     /**
      * TODO 4: End
      */

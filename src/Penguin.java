@@ -4,7 +4,6 @@ import java.io.Serializable;
  * TODO 1.b: Implement serializable interface for class Penguin
  */
 public class Penguin extends Animal implements Walk, Swim, Serializable {
-    private static final long serialVersionUID = 1L;
 
     boolean isSwimming;
     int walkSpeed;
@@ -58,16 +57,15 @@ public class Penguin extends Animal implements Walk, Swim, Serializable {
         System.out.println("Penguin: I am walking at the speed " + walkSpeed + " mph");
     }
 
+    /**
+     * TODO 2.b: Override the toString method display the deserialized content after reading the file
+     */
     @Override
     public String toString() {
         return "Penguin{" +
-                "name='" + getNameOfAnimal() + '\'' +
-                ", age=" + getAge() +
-                ", height=" + getHeight() +
-                ", weight=" + getWeight() +
-                ", walkSpeed=" + getWalkSpeed() +
-                ", swimSpeed=" + getSwimSpeed() +
-                ", isSwimming=" + isSwimming() +
+                "isSwimming=" + isSwimming +
+                ", walkSpeed=" + walkSpeed +
+                ", swimSpeed=" + swimSpeed +
                 '}';
     }
 }

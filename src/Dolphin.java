@@ -4,7 +4,6 @@ import java.io.Serializable;
  * TODO 1.c: Implement serializable interface for class Dolphin
  */
 public class Dolphin extends Animal implements Swim, Serializable {
-    private static final long serialVersionUID = 1L;
 
     // property for color of dolphin
     String color;
@@ -47,14 +46,14 @@ public class Dolphin extends Animal implements Swim, Serializable {
         System.out.println("Dolphin: I am swimming at the speed " + swimmingSpeed);
     }
 
+    /**
+     * TODO 2.c: Override the toString method display the deserialized content after reading the file
+     */
+
     @Override
     public String toString() {
         return "Dolphin{" +
-                "name='" + getNameOfAnimal() + '\'' +
-                ", age=" + getAge() +
-                ", height=" + getHeight() +
-                ", weight=" + getWeight() +
-                ", color='" + color + '\'' +
+                "color='" + color + '\'' +
                 ", swimmingSpeed=" + swimmingSpeed +
                 '}';
     }
