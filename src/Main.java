@@ -1,5 +1,8 @@
 import java.util.Scanner;
 import java.io.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -139,7 +142,8 @@ public class Main {
                  * object state of the animal into the file
                  */
                 case 4:
-
+                    writeObjectsToFile(tigerObject, penguinObject, dolphinObject);
+                    break;
                     /**
                      * TODO 6: Introduce case 5 to call the readObjectsFromFile method to
                      * fetch the object state of the animal from the file to display on screen
@@ -190,7 +194,22 @@ public class Main {
      *  TODO 3.b: Save the state of Penguin to output penguin.txt file
      *  TODO 3.c: Save the state of Dolphin to output dolphin.txt file
      */
-
+    public static void writeObjectsToFile(Tiger tiger, Penguin penguin, Dolphin dolphin) {
+        // Serialize each animal into its own file
+        try (
+                ObjectOutputStream oosTiger   = new ObjectOutputStream(new FileOutputStream("tiger.txt"));
+                ObjectOutputStream oosPenguin = new ObjectOutputStream(new FileOutputStream("penguin.txt"));
+                ObjectOutputStream oosDolphin = new ObjectOutputStream(new FileOutputStream("dolphin.txt"));
+        ) {
+            oosTiger.writeObject(tiger);
+            oosPenguin.writeObject(penguin);
+            oosDolphin.writeObject(dolphin);
+            System.out.println("All animals have been saved to files.");
+        } catch (IOException e) {
+            System.err.println("Error saving animals to file:");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * TODO 3: End
